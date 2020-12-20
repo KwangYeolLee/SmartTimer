@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/timerLayout"
+    tools:context=".ui.TimerFragment">
+
+    <com.androchef.happytimer.countdowntimer.DynamicCountDownView
+        android:id="@+id/dynamicCountDownView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:dynamic_show_hour="true"
+        app:dynamic_show_labels="true"
+        app:dynamic_show_minutes="true"
+        app:dynamic_show_seconds="true"
+        app:dynamic_timer_separator_text_size="50sp"
+        app:dynamic_timer_text__separator_isBold="true"
+        app:dynamic_timer_text_color="@android:color/white"
+        app:dynamic_timer_text_isBold="true"
+        app:dynamic_timer_text_separator=":"
+        app:dynamic_timer_text_separator_color="@color/black"
+        app:dynamic_timer_text_size="250sp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/timerStateImage"
+        android:src="@drawable/ic_outline_stop_circle_24"
+        android:layout_toEndOf="@+id/dynamicCountDownView"
+        android:layout_alignTop="@+id/dynamicCountDownView"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/dynamicCountDownView"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playBtn"
+            android:src="@drawable/baseline_play_circle_outline_black_48dp"
+            android:background="#00000000"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pauseBtn"
+            android:src="@drawable/baseline_pause_circle_outline_black_48dp"
+            android:background="#00000000"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stopBtn"
+            android:src="@drawable/outline_stop_circle_black_48dp"
+            android:background="#00000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/connectBtn"
+            android:layout_marginStart="5dp"
+            app:icon="@drawable/bluetooth"
+            app:iconSize="15dp"
+            android:text="BLE"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingBtn"
+            android:layout_marginStart="5dp"
+            app:icon="@drawable/settings"
+            app:iconSize="15dp"
+            android:text="Settings"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#33000000"
+        android:textSize="20sp"
+        android:textAlignment="textEnd"
+        android:paddingEnd="5dp"
+        android:id="@+id/debugTxt"
+        android:text="Debug Message"
+        tools:ignore="RtlSymmetry" />
+
+
+</RelativeLayout>

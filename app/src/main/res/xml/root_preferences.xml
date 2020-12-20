@@ -1,0 +1,32 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/sensor_header">
+
+        <EditTextPreference
+            app:key="angle"
+            app:title="@string/angle_title"
+            app:dialogMessage="@string/angle_dialog_message"
+            app:defaultValue="30"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="break_time"
+            app:title="@string/break_time_title"
+            app:dialogMessage="@string/break_time_dialog_message"
+            app:defaultValue="3"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/learning_goal_time_header">
+
+        <EditTextPreference
+            app:key="learning_goal_time"
+            app:title="@string/learning_goal_time__title"
+            app:dialogMessage="@string/learning_goal_time_dialog_message"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SmartTimer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Bluetooth Status -->
+    <string name="bt_title">장치 선택</string>
+    <string name="bt_connect">Connect</string>
+    <string name="bt_disconnect">Disconnect</string>
+    <string name="bt_not_found">페어링된 장치가 없습니다.</string>
+    <string name="bt_disabled">블루투스가 비활성화 되어 있습니다.</string>
+
+    <!-- Preference Titles -->
+    <string name="sensor_header">휴식시간</string>
+    <string name="learning_goal_time_header">학습목표시간</string>
+
+    <!-- Sensor Preferences -->
+    <string name="angle_title">펜 각도(Angle)</string>
+    <string name="angle_dialog_message">설정 각도 이하면 휴식시간 타이머가 동작합니다.(5 ~ 30도)</string>
+    <string name="break_time_title">동작시간(초)</string>
+    <string name="break_time_dialog_message">다음 시간 설정 후 타이머가 일시정지 됩니다.(3 ~ 60초)</string>
+
+    <!-- BreakTime Preferences -->
+    <string name="learning_goal_time__title">목표시간</string>
+    <string name="learning_goal_time_dialog_message">학습 목표 시간을 설정해 주세요. 학습 목표시간을 달성하면 타이머가 정지 됩니다.(1 ~ 24시)</string>
+</resources>
