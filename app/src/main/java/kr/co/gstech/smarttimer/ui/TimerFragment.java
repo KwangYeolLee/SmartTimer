@@ -56,7 +56,6 @@ public class TimerFragment extends MainFragment {
     private BTCommunicator mBTCommunicator;
     private HappyTimer.State mTimerState;
     private Timer mPauseTimer = null;
-    private boolean isFirst = true;
 
     private Drawable mPlayImage;
     private Drawable mPauseImage;
@@ -104,9 +103,7 @@ public class TimerFragment extends MainFragment {
     }
 
     private void releaseObject() {
-        if (mPauseTimer != null) {
-            mPauseTimer.cancel();
-        }
+        cancelPauseTimer();
         if (mDynamicCountDownView != null) {
             mDynamicCountDownView.stopTimer();
         }
@@ -117,8 +114,9 @@ public class TimerFragment extends MainFragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void initialize() {
-        isFirst = true;
+        mTimerState = HappyTimer.State.STOPPED;
         FragmentActivity activity = getActivity();
+        assert activity != null;
         mDynamicCountDownView = activity.findViewById(R.id.dynamicCountDownView);
         mDynamicCountDownView.initTimer(mLearningGoalTime * 3600, HappyTimer.Type.COUNT_UP);
         mDynamicCountDownView.setTimerType(HappyTimer.Type.COUNT_UP);
@@ -173,31 +171,34 @@ public class TimerFragment extends MainFragment {
                 case MSG.BT_MESSAGE_READ:
                     AngleVO angleVO = (AngleVO) msg.obj;
                     String currentState;
-                    if (Math.abs(angleVO.getX()) > mBreakTimeAngle) {    //Study..
-                        if (isFirst) {
-                            mDynamicCountDownView.startTimer();
-                            isFirst = false;
-                            mTimerStateImageView.setImageDrawable(mPlayImage);
-                        } else {
-                            if (mTimerState != HappyTimer.State.RUNNING) {
-                                if (mPauseTimer != null) {
-                                    mPauseTimer.cancel();
-                                }
-                                mDynamicCountDownView.resumeTimer();
-                                mTimerStateImageView.setImageDrawable(mPlayImage);
-                            }
-                        }
+                    if (Math.abs(angleVO.getX()) > mBreakTimeAngle) {   //Study..
+                        onStateStudy();
                         currentState = "Study...";
-                    } else {                                //Take a break.
-                        if (mTimerState != HappyTimer.State.PAUSED) {
-                            if (mPauseTimer == null) {
-                                startPauseTimer();
-                            }
-                        }
-                        currentState = "Take a break (after 3 second).";
+                    } else {                                            //Take a break.
+                        onStateTakeBreak();
+                        currentState = "Take a break (after " + mBreakTimeSecond + " +  second).";
                     }
                     showDebugMsg(angleVO, currentState);
                     break;
+            }
+        }
+    }
+
+    private void onStateStudy() {
+        if (mTimerState == HappyTimer.State.STOPPED) {
+            mDynamicCountDownView.startTimer();
+            mTimerStateImageView.setImageDrawable(mPlayImage);
+        } else if (mTimerState == HappyTimer.State.PAUSED) {
+            cancelPauseTimer();
+            mDynamicCountDownView.resumeTimer();
+            mTimerStateImageView.setImageDrawable(mPlayImage);
+        }
+    }
+
+    private void onStateTakeBreak() {
+        if (mTimerState == HappyTimer.State.RUNNING || mTimerState == HappyTimer.State.RESUMED) {
+            if (mPauseTimer == null) {
+                startPauseTimer();
             }
         }
     }
@@ -210,6 +211,7 @@ public class TimerFragment extends MainFragment {
                 requireActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.i(TAG, "CALL startPauseTimer");
                         mDynamicCountDownView.pauseTimer();
                         mPauseTimer = null;
                         mTimerStateImageView.setImageDrawable(mPauseImage);
@@ -217,6 +219,13 @@ public class TimerFragment extends MainFragment {
                 });
             }
         }, mBreakTimeSecond * 1000);
+    }
+
+    private void cancelPauseTimer() {
+        if (mPauseTimer != null) {
+            Log.i(TAG, "CALL cancelPauseTimer");
+            mPauseTimer.cancel();
+        }
     }
 
     class BtnOnClickListener implements Button.OnClickListener {
