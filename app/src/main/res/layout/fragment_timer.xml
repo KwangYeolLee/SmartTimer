@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/timerLayout"
     tools:context=".ui.TimerFragment">
 
     <com.androchef.happytimer.countdowntimer.DynamicCountDownView
@@ -22,42 +22,44 @@
         app:dynamic_timer_text_isBold="true"
         app:dynamic_timer_text_separator=":"
         app:dynamic_timer_text_separator_color="@color/black"
-        app:dynamic_timer_text_size="250sp" />
+        app:dynamic_timer_text_size="150sp" />
 
     <ImageView
+        android:id="@+id/timerStateImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/timerStateImage"
-        android:src="@drawable/ic_outline_stop_circle_24"
+        android:layout_alignTop="@+id/dynamicCountDownView"
         android:layout_toEndOf="@+id/dynamicCountDownView"
-        android:layout_alignTop="@+id/dynamicCountDownView"/>
+        android:src="@drawable/ic_outline_stop_circle_24" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@+id/dynamicCountDownView"
-        android:visibility="invisible"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/playBtn"
-            android:src="@drawable/baseline_play_circle_outline_black_48dp"
-            android:background="#00000000"/>
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/baseline_play_circle_outline_black_48dp" />
+
+        <ImageButton
             android:id="@+id/pauseBtn"
-            android:src="@drawable/baseline_pause_circle_outline_black_48dp"
-            android:background="#00000000"/>
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/baseline_pause_circle_outline_black_48dp" />
+
+        <ImageButton
             android:id="@+id/stopBtn"
-            android:src="@drawable/outline_stop_circle_black_48dp"
-            android:background="#00000000"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/outline_stop_circle_black_48dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,34 +68,35 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/connectBtn"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:id="@+id/connectBtn"
             android:layout_marginStart="5dp"
+            android:text="BLE"
             app:icon="@drawable/bluetooth"
-            app:iconSize="15dp"
-            android:text="BLE"/>
+            app:iconSize="15dp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/settingBtn"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:id="@+id/settingBtn"
             android:layout_marginStart="5dp"
+            android:text="Settings"
             app:icon="@drawable/settings"
-            app:iconSize="15dp"
-            android:text="Settings"/>
+            app:iconSize="15dp" />
     </LinearLayout>
 
 
     <TextView
+        android:id="@+id/debugTxt"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#33000000"
-        android:textSize="20sp"
-        android:textAlignment="textEnd"
         android:paddingEnd="5dp"
-        android:id="@+id/debugTxt"
         android:text="Debug Message"
+        android:textAlignment="textEnd"
+        android:textSize="20sp"
+        android:visibility="invisible"
         tools:ignore="RtlSymmetry" />
 
 
